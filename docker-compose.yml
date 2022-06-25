@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  php:
+    image: sulu-skeleton-php:dev
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      target: development
+    env_file: .env
+    depends_on:
+      - database
+    volumes:
+      - .:/var/www/html:rw,cached
+
+  nginx:
+    image: sulu-skeleton-nginx:dev
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html:ro
+    depends_on:
+      - php
+
+  database:
+    image: mysql/mysql-server:${MYSQL_VERSION:-8.0}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-su_myapp}
+      # You should definitely change the password in production
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-ChangeMe}
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - db-data:/var/lib/mysql
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/mysql:rw
+
+volumes:
+  db-data:

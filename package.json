@@ -1,0 +1,40 @@
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^2.1.0",
+        "core-js": "^3.23.2",
+        "eslint": "^8.18.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "postcss-loader": "^6.0.0",
+        "prettier": "^2.7.1",
+        "regenerator-runtime": "^0.13.9",
+        "sass": "^1.53.0",
+        "sass-loader": "^12.0.0",
+        "stylelint": "^14.9.1",
+        "stylelint-config-prettier": "^9.0.3",
+        "stylelint-prettier": "^2.0.0",
+        "webpack-notifier": "^1.15.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "lint:js": "eslint 'assets/**/*.js' --ignore-pattern 'assets/admin'",
+        "lint:js:fix": "eslint 'assets/**/*.js' --fix --ignore-pattern 'assets/admin'",
+        "lint:scss": "stylelint 'assets/**/*.scss'",
+        "lint:scss:fix": "stylelint 'assets/**/*.scss' --fix",
+        "lint": "yarn lint:js && yarn lint:scss",
+        "lint:fix": "yarn lint:js:fix && yarn lint:scss:fix",
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "browserslist": [
+        "> 0.5%",
+        "last 2 versions",
+        "IE 11"
+    ],
+    "dependencies": {
+        "postcss": "^8.4.14"
+    }
+}
